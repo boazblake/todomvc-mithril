@@ -8,8 +8,7 @@ const Layout = {
   view: ({ attrs: { mdl } }) =>
     m("section.todoapp", [
       m(Header, { mdl }),
-      m(Body, { mdl }),
-      m(Footer, { mdl }),
+      mdl.todos.length >= 1 && [m(Body, { mdl }), m(Footer, { mdl })],
     ]),
 };
 

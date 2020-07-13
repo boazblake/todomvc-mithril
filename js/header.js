@@ -1,6 +1,6 @@
 import m from "mithril";
 
-import { newTodo, saveState } from "./model";
+import { newTodo, saveState, ENTER_KEY } from "./model";
 
 const Header = {
   view: ({ attrs: { mdl } }) =>
@@ -8,7 +8,7 @@ const Header = {
       m("h1", "todos"),
       m("input.new-todo[placeholder='What needs to be done?'][autofocus]", {
         onkeydown: (e) => {
-          if (e.keyCode == 13 && mdl.new.title.length >= 1) {
+          if (e.keyCode == ENTER_KEY && mdl.new.title.length >= 1) {
             mdl.new.title.trim();
             mdl.todos.push(mdl.new);
             mdl.new = newTodo();

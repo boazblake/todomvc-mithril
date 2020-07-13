@@ -2222,7 +2222,7 @@ module.exports = m
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.saveState = exports.model = exports.newTodo = void 0;
+exports.ENTER_KEY = exports.ESCAPE_KEY = exports.saveState = exports.model = exports.newTodo = void 0;
 var TODO = {
   title: "",
   status: "active",
@@ -2246,6 +2246,10 @@ var saveState = function saveState(mdl) {
 };
 
 exports.saveState = saveState;
+var ESCAPE_KEY = 27;
+exports.ESCAPE_KEY = ESCAPE_KEY;
+var ENTER_KEY = 13;
+exports.ENTER_KEY = ENTER_KEY;
 },{}],"js/header.js":[function(require,module,exports) {
 "use strict";
 
@@ -2265,7 +2269,7 @@ var Header = {
     var mdl = _ref.attrs.mdl;
     return (0, _mithril.default)("header.header", [(0, _mithril.default)("h1", "todos"), (0, _mithril.default)("input.new-todo[placeholder='What needs to be done?'][autofocus]", {
       onkeydown: function onkeydown(e) {
-        if (e.keyCode == 13 && mdl.new.title.length >= 1) {
+        if (e.keyCode == _model.ENTER_KEY && mdl.new.title.length >= 1) {
           mdl.new.title.trim();
           mdl.todos.push(mdl.new);
           mdl.new = (0, _model.newTodo)();
@@ -2331,11 +2335,11 @@ var Body = {
         }
       })]), (0, _mithril.default)("input.edit", {
         onkeydown: function onkeydown(e) {
-          if (e.which == 27) {
+          if (e.which == _model.ESCAPE_KEY) {
             todo.isEditing = false;
           }
 
-          if (e.keyCode == 13) {
+          if (e.keyCode == _model.ENTER_KEY) {
             if (todo.newtitle.length) {
               todo.isEditing = false;
               todo.title = todo.newtitle;
@@ -2423,11 +2427,11 @@ var Layout = {
     var mdl = _ref.attrs.mdl;
     return (0, _mithril.default)("section.todoapp", [(0, _mithril.default)(_header.default, {
       mdl: mdl
-    }), (0, _mithril.default)(_body.default, {
+    }), mdl.todos.length >= 1 && [(0, _mithril.default)(_body.default, {
       mdl: mdl
     }), (0, _mithril.default)(_footer.default, {
       mdl: mdl
-    })]);
+    })]]);
   }
 };
 
@@ -2511,7 +2515,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50366" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56478" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

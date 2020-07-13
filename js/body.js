@@ -1,5 +1,5 @@
 import m from "mithril";
-import { saveState } from "./model";
+import { saveState, ENTER_KEY, ESCAPE_KEY } from "./model";
 
 const Body = {
   view: ({ attrs: { mdl } }) =>
@@ -53,10 +53,10 @@ const Body = {
                 ]),
                 m("input.edit", {
                   onkeydown: (e) => {
-                    if (e.which == 27) {
+                    if (e.which == ESCAPE_KEY) {
                       todo.isEditing = false;
                     }
-                    if (e.keyCode == 13) {
+                    if (e.keyCode == ENTER_KEY) {
                       if (todo.newtitle.length) {
                         todo.isEditing = false;
                         todo.title = todo.newtitle;
