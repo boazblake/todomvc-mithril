@@ -2,11 +2,9 @@
 
 Run dev environment:
 
-(install parcel-bundler globally)
-
 ```
 yarn install
-parcel index.html
+yarn run dev
 # open http://localhost:1234/
 ```
 
