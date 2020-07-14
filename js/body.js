@@ -2,8 +2,9 @@ import m from "mithril"
 import { saveState, ENTER_KEY, ESCAPE_KEY } from "./model"
 
 const Body = {
-  view: ({ attrs: { mdl } }) =>
-    m("section.main", [
+  view: ({ attrs: { mdl } }) => {
+    console.log(m.route.get())
+    return m("section.main", [
       m("input.toggle-all[id='toggle-all'][type='checkbox']", {
         checked: mdl.todos.filter((todo) => todo.status == "completed").length,
         onclick: (_) => {
@@ -75,7 +76,8 @@ const Body = {
             )
           )
       ),
-    ]),
+    ])
+  },
 }
 
 export default Body
