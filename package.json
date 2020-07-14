@@ -1,13 +1,14 @@
 {
-  "name": "id-cards",
+  "name": "mithril-todomvc",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.html",
   "license": "MIT",
   "scripts": {
     "dev": "parcel index.html",
     "build": "parcel build --public-url ./ index.html"
   },
   "devDependencies": {
+    "cssnano": "^4.1.10",
     "parcel": "^1.12.4"
   },
   "dependencies": {
