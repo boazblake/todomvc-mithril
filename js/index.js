@@ -8,6 +8,4 @@ let mdl = localStorage.getItem("todos-mithril")
   ? JSON.parse(localStorage.getItem("todos-mithril"))
   : model
 
-m.route.prefix = "#"
-
 m.route(root, "/", Routes(mdl))
