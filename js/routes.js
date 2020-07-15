@@ -15,6 +15,7 @@ const Layout = {
 const Routes = (mdl) =>
   ROUTES.reduce((routes, { route }) => {
     routes[route] = {
+      onmatch: (_, __, route) => (mdl.route = route),
       render: () => m(Layout, { mdl }),
     }
     return routes

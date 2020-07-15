@@ -26,7 +26,7 @@ const Footer = {
             m(
               m.route.Link,
               {
-                class: m.route.get() == route && "selected",
+                class: mdl.route == route && "selected",
                 href: route,
               },
               filter

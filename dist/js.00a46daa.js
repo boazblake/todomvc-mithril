@@ -2278,10 +2278,6 @@ var Header = {
   view: function view(_ref) {
     var mdl = _ref.attrs.mdl;
     return (0, _mithril.default)("header.header", [(0, _mithril.default)("h1", "todos"), (0, _mithril.default)("input.new-todo[placeholder='What needs to be done?'][autofocus]", {
-      oncreate: function oncreate(_ref2) {
-        var dom = _ref2.dom;
-        return dom.autofocus = true;
-      },
       onkeydown: function onkeydown(e) {
         if (e.keyCode == _model.ENTER_KEY && mdl.new.title.length >= 1) {
           mdl.new.title.trim();
@@ -2313,10 +2309,16 @@ var _model = require("./model");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var bySelectedStatus = function bySelectedStatus(mdl) {
+  return function (todo) {
+    return mdl.route == "/" ? todo : todo.status == mdl.route.split("/")[1];
+  };
+};
+
 var Body = {
   view: function view(_ref) {
     var mdl = _ref.attrs.mdl;
-    console.log(_mithril.default.route.get());
+    console.log("route", mdl.route, mdl.route);
     return (0, _mithril.default)("section.main", [(0, _mithril.default)("input.toggle-all[id='toggle-all'][type='checkbox']", {
       checked: mdl.todos.filter(function (todo) {
         return todo.status == "completed";
@@ -2327,9 +2329,7 @@ var Body = {
         });
         (0, _model.saveState)(mdl);
       }
-    }), (0, _mithril.default)("label[for='toggle-all']", "Mark all as complete"), (0, _mithril.default)("ul.todo-list", mdl.todos.filter(function (todo) {
-      return _mithril.default.route.get() == "/" ? todo : todo.status == _mithril.default.route.get().split("/")[1];
-    }).map(function (todo, idx) {
+    }), (0, _mithril.default)("label[for='toggle-all']", "Mark all as complete"), (0, _mithril.default)("ul.todo-list", mdl.todos.filter(bySelectedStatus(mdl)).map(function (todo, idx) {
       return (0, _mithril.default)("li.".concat(todo.status, ".").concat(todo.isEditing && "editing"), {
         key: idx
       }, [(0, _mithril.default)("div.view", [(0, _mithril.default)("input.toggle[type='checkbox']", {
@@ -2408,7 +2408,7 @@ var Footer = {
       var route = _ref2.route,
           filter = _ref2.filter;
       return (0, _mithril.default)("li", (0, _mithril.default)(_mithril.default.route.Link, {
-        class: _mithril.default.route.get() == route && "selected",
+        class: mdl.route == route && "selected",
         href: route
       }, filter));
     })), todosCompleted(mdl) >= 1 && (0, _mithril.default)("button.clear-completed", {
@@ -2459,6 +2459,9 @@ var Routes = function Routes(mdl) {
   return _model.ROUTES.reduce(function (routes, _ref2) {
     var route = _ref2.route;
     routes[route] = {
+      onmatch: function onmatch(_, __, route) {
+        return mdl.route = route;
+      },
       render: function render() {
         return (0, _mithril.default)(Layout, {
           mdl: mdl
@@ -2514,7 +2517,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62790" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65515" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -7,7 +7,6 @@ const Header = {
     m("header.header", [
       m("h1", "todos"),
       m("input.new-todo[placeholder='What needs to be done?'][autofocus]", {
-        oncreate: ({ dom }) => (dom.autofocus = true),
         onkeydown: (e) => {
           if (e.keyCode == ENTER_KEY && mdl.new.title.length >= 1) {
             mdl.new.title.trim()
