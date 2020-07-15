@@ -2278,6 +2278,10 @@ var Header = {
   view: function view(_ref) {
     var mdl = _ref.attrs.mdl;
     return (0, _mithril.default)("header.header", [(0, _mithril.default)("h1", "todos"), (0, _mithril.default)("input.new-todo[placeholder='What needs to be done?'][autofocus]", {
+      oncreate: function oncreate(_ref2) {
+        var dom = _ref2.dom;
+        return dom.autofocus = true;
+      },
       onkeydown: function onkeydown(e) {
         if (e.keyCode == _model.ENTER_KEY && mdl.new.title.length >= 1) {
           mdl.new.title.trim();
@@ -2480,7 +2484,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var root = document.getElementById("todomvc");
 var mdl = localStorage.getItem("todos-mithril") ? JSON.parse(localStorage.getItem("todos-mithril")) : _model.model;
-_mithril.default.route.prefix = "";
 
 _mithril.default.route(root, "/", (0, _routes.default)(mdl));
 },{"mithril":"node_modules/mithril/index.js","./model":"js/model.js","./routes":"js/routes.js"}],"../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -2511,7 +2514,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52007" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62790" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
